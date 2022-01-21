@@ -1,0 +1,52 @@
+name = "test_signup"
+type = "api_test"
+priority=0
+
+[api]
+url="signup"
+timeout=5
+method="POST"
+
+[[subcase]]
+    [subcase.body]
+        username="guest" 
+        password="7777777"
+    [[subcase.assert]]
+        method="equal"
+        value=0
+        field="code"
+        msg="tset code useful"
+
+    [[subcase.assert]]
+        method="equal"
+        value="success"
+        field="message"
+
+[[subcase]]
+    [subcase.body]
+        username="aksljda"
+    [[subcase.assert]]
+        method="equal"
+        value=101
+        field="code"
+
+    [[subcase.assert]]
+        method="equal"
+        value="fields should not empty"
+        field="message"
+
+[[subcase]]
+    [subcase.body]
+        username="admin"
+        password="aksdjakd"
+
+    [[subcase.assert]]
+        method="equal"
+        value=101
+        field="code"
+
+    [[subcase.assert]]
+        method="equal"
+        value="username already exists"
+        field="message"
+

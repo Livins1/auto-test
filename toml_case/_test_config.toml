@@ -1,0 +1,12 @@
+
+project = "example"
+verbose = true
+
+[author]
+name="someone"
+email="example@hotmail.com"
+
+[base]
+host="http://127.0.0.1:8000"
+timeout=5
+

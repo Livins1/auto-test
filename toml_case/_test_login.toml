@@ -1,0 +1,68 @@
+name = "test_login"
+type = "api_test"
+priority=0
+
+
+[api]
+url="login"
+timeout=5
+method="GET"
+
+
+[[subcase]]
+    [subcase.body]
+        username="admin"
+        password="1234567"
+
+    [[subcase.assert]]
+       method="equal" 
+       value=0
+       field="code"
+       
+    [[subcase.assert]]
+       method="equal" 
+       value="success"
+       field="message"
+
+    [[subcase.assert]]
+        method="IsNotNone"
+        field="data"
+
+    [[subcase.assert]]
+        method="equal"
+        splitField="data.token"
+        fieldHandle="length"
+        value=14
+
+[[subcase]]
+    [subcase.body]
+        username=""
+        password="123"
+
+    [[subcase.assert]]
+        method="equal"
+        field="code"
+        value=101
+    [[subcase.assert]]
+        method="equal"
+        field="message"
+        value="empty username"
+    [[subcase.assert]]
+        method="False"
+        field="data"
+
+[[subcase]]
+    [subcase.body]
+        username="askldj"
+        password="zxkczjc"
+    [[subcase.assert]]
+        method="equal"
+        field="code"
+        value=101
+    [[subcase.assert]]
+        method="equal"
+        field="message"
+        value="wrong account info"
+    [[subcase.assert]]
+        method="False"
+        field="data"

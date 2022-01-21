@@ -1,9 +1,9 @@
-import unittest
 import httpx
+import unittest
 
 
 class RequestAdapter:
-    def __init__(self, host_url):
+    def __init__(self, host_url="http://127.0.0.1:8080"):
         self.session = httpx.Client()
         self.host_url = host_url
         self.api = ""
